@@ -1,0 +1,9 @@
+.panel {
+    position: relative;
+    padding: 15px;
+    justify-self: center;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(35px, 60px));
+    grid-auto-rows: minmax(35px, 60px);
+    gap: 10px;
+}

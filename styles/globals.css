@@ -2,8 +2,12 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: 'Fira Sans', sans-serif;
+  color: var(--text-100);
+}
+
+button {
+  color: var(--text-100);
 }
 
 a {
@@ -13,4 +17,29 @@ a {
 
 * {
   box-sizing: border-box;
+  font-family: 'Fira Sans', sans-serif;
+}
+
+:root {
+  --main-100: #FFFFFF;
+  --main-200: #F2F4FC;
+  --main-300: #C7CBDC;
+  --main-400: #9B9EAF;
+  --main-500: #75798C;
+  --text-100: #2A2A34;
+  --text-200: #343745;
+  --text-900: #FFFFFF;
+
+  --dark-500: #484B5B;
+  --dark-600: #343745;
+  --dark-700: #2A2A34;
+  --yellow-500: #E2C107;
+  --yellow-600: #B59900;
+  --yellow-700: #8C7700;
+  --green-500: #36AE7C;
+  --green-600: #0D794C;
+  --green-700: #045735;
+  --blue-500: #1E78FF;
+  --blue-600: #0051CA;
+  --blue-700: #003D99;
 }

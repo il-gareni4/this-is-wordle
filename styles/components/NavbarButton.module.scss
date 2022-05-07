@@ -1,0 +1,16 @@
+.btn {
+    border: none;
+    background-color: var(--main-100);
+    color: var(--text-100);
+    fill: var(--text-100);
+    margin: 0;
+    padding: 8px;
+    border-radius: 12px;
+    line-height: 0px;
+    transition: background-color 150ms;
+
+    &:hover {
+        background-color: var(--main-200);
+        cursor: pointer;
+    }
+}

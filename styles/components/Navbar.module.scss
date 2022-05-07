@@ -1,0 +1,24 @@
+.navbar {
+    box-shadow: 0px 4px 25px rgba(42, 42, 52, 0.12);
+    border-bottom: 2px solid #C7CBDC;
+    padding: 10px 25px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+
+    & > *:first-child {
+        justify-self: left;
+    }
+
+    & > *:nth-child(2) {
+        justify-self: center;
+    }
+
+    & > *:last-child {
+        justify-self: right;
+    }
+}
+
+.rightButtons > button:last-child {
+    margin-left: 15px;
+}

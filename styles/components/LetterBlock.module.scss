@@ -1,0 +1,37 @@
+.letterBlock {
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    font-size: 2.25rem;
+    border: 2px solid transparent;
+}
+
+.empty {
+    border-color: var(--main-300);
+}
+
+.letter {
+    border-color: var(--main-400);
+}
+
+.correct, .wrongPlacement, .incorrect {
+    color: var(--text-900);
+    font-weight: 500;
+} 
+
+.incorrect {
+    border-color: var(--dark-500);
+    background-color: var(--dark-500);
+}
+
+.wrongPlacement {
+    border-color: var(--yellow-500);
+    background-color: var(--yellow-500);
+    box-shadow: 0 0 6px rgba(226, 193, 7, 0.33);
+}
+
+.correct {
+    border-color: var(--green-500);
+    background-color: var(--green-500);
+    box-shadow: 0 0 6px rgba(54, 174, 124, 0.33);
+}
