@@ -1,4 +1,5 @@
 import type { NextPage } from 'next'
+import Head from 'next/head'
 import { useEffect, useState } from 'react'
 import RightArrowIcon from '../components/icons/RightArrowIcon'
 import Keyboard from '../components/Keyboard'
@@ -30,6 +31,9 @@ const Home: NextPage = () => {
 
   return (
     <>
+      <Head>
+        <title>This is Wordle</title>
+      </Head>
       <Navbar />
       <div className={styles.container}>
         <WordsPanel className={styles.panel} />

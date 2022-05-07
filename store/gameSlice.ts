@@ -53,8 +53,8 @@ export const gameSlice = createSlice({
             for (let i = 0; i < state.attempts[0].length; i++) {
                 const letter = state.attempts[state.lastLetter[0]][i]
                 if (state.intendedWord[i] == letter) state.lettersState[letter] = "green";
-                else if (state.intendedWord.includes(letter) && letter !== "green") state.lettersState[letter] = "yellow";
-                else state.lettersState[letter] = "black";
+                else if (state.intendedWord.includes(letter) && state.lettersState[letter] !== "green") state.lettersState[letter] = "yellow";
+                else if (state.lettersState[letter] !== "green" && state.lettersState[letter] !== "yellow") state.lettersState[letter] = "black";
             }
             state.lastLetter = [state.lastLetter[0] + 1, 0];
         }
