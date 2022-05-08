@@ -1,15 +1,27 @@
 .keyboard {
     display: flex;
+    max-width: calc((60px + 2px * 2) * 10 + 9px * 9);
+    padding: 0 9px;
+    width: 100%;
     flex-direction: column;
     align-items: center;
 }
 
+.space {
+    flex: 0.5
+}
+
 .keyboardRow {
-    & > button:not(:first-child) {
+    justify-content: center;
+    display: flex;
+    width: 100%;
+    flex-wrap: nowrap;
+
+    &>button:not(:first-child) {
         margin-left: 9px;
     }
 }
 
-.keyboardRow + .keyboardRow {
+.keyboardRow+.keyboardRow {
     margin-top: 9px;
 }

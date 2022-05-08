@@ -1,4 +1,4 @@
-export default words4 = {
+export default {
     aahs: 1,
     aals: 1,
     aani: 1,
