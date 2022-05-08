@@ -1,15 +1,21 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { time } from 'console';
+import words5 from "../data/words5"
 
 interface GameState {
     intendedWord: string,
     maxTries: number,
     attempts: string[][],
     lastLetter: number[],
-    lettersState: any
+    lettersState: any,
+    wordsList: any,
+    error?: {time: number, message: string}
 }
 
+const words = Object.keys(words5);
+
 const initialState: GameState = {
-    intendedWord: "HEART",
+    intendedWord: words[Math.floor(Math.random() * words.length)].toUpperCase(),
     maxTries: 6,
     attempts: [],
     lastLetter: [0, 0],
@@ -18,7 +24,8 @@ const initialState: GameState = {
         I: '', J: '', K: '', L: '', M: '', N: '', O: '', P: '',
         Q: '', R: '', S: '', T: '', U: '', V: '', W: '', X: '',
         Y: '', Z: ''
-    }
+    },
+    wordsList: words5
 }
 
 for (let i = 0; i < initialState.maxTries; i++) {
@@ -50,9 +57,13 @@ export const gameSlice = createSlice({
         confirmWord: (state) => {
             if (state.lastLetter[0] >= state.maxTries ||
                 state.lastLetter[1] < state.intendedWord.length) return;
+            if (!state.wordsList.hasOwnProperty(state.attempts[state.lastLetter[0]].join("").toLocaleLowerCase())) {
+                state.error = {time: Date.now(), message: "Not in word list"}
+                return;
+            }
             for (let i = 0; i < state.attempts[0].length; i++) {
                 const letter = state.attempts[state.lastLetter[0]][i]
-                if (state.intendedWord[i] == letter) state.lettersState[letter] = "green";
+                if (state.intendedWord[i] === letter) state.lettersState[letter] = "green";
                 else if (state.intendedWord.includes(letter) && state.lettersState[letter] !== "green") state.lettersState[letter] = "yellow";
                 else if (state.lettersState[letter] !== "green" && state.lettersState[letter] !== "yellow") state.lettersState[letter] = "black";
             }
@@ -61,7 +72,6 @@ export const gameSlice = createSlice({
     },
 })
 
-// Action creators are generated for each case reducer function
 export const { addLetter, removeLetter, confirmWord } = gameSlice.actions
 
 export default gameSlice.reducer

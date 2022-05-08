@@ -27,11 +27,11 @@ export default function WordsPanel({ className }: WordsPanelProps) {
           else blockState = "empty"
 
           let anim;
-          if (blockState === "correct") anim = `${letterBlockStyles.correctAnim} 0.6s ease-in-out forwards 1 ${0.2 * letterIndex}s`;
-          else if (blockState === "wrongPlacement") anim = `${letterBlockStyles.wrongPlacementAnim} 0.6s ease-in-out forwards 1 ${0.2 * letterIndex}s`;
-          else if (blockState === "incorrect") anim = `${letterBlockStyles.incorrectAnim} 0.6s ease-in-out forwards 1 ${0.2 * letterIndex}s`;
+          if (blockState === "correct") anim = `${letterBlockStyles.correctAnim} 0.5s ease-in-out forwards 1 ${0.25 * letterIndex}s`;
+          else if (blockState === "wrongPlacement") anim = `${letterBlockStyles.wrongPlacementAnim} 0.5s ease-in-out forwards 1 ${0.25 * letterIndex}s`;
+          else if (blockState === "incorrect") anim = `${letterBlockStyles.incorrectAnim} 0.5s ease-in-out forwards 1 ${0.25 * letterIndex}s`;
           else if (blockState === "letter") anim = `${letterBlockStyles.letterAnim} 0.1s ease-in-out forwards 1`;
-          else anim = "";
+          else anim = "none";
 
           return (<LetterBlock
             key={rowIndex * row.length + letterIndex}

@@ -1,14 +1,13 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import { useEffect, useState } from 'react'
-import RightArrowIcon from '../components/icons/RightArrowIcon'
-import Keyboard from '../components/Keyboard'
-import KeyboardKey from '../components/keyboard/KeyboardKey'
-import Navbar from '../components/Navbar'
-import WordsPanel from '../components/WordsPanel'
-import { useAppDispatch } from '../hooks'
 import { addLetter, confirmWord, removeLetter } from '../store/gameSlice'
+import { useAppDispatch } from '../hooks'
+import React, { useEffect } from 'react'
+import ErrorDisplay from '../components/ErrorDisplay'
+import Head from 'next/head'
+import Keyboard from '../components/Keyboard'
+import Navbar from '../components/Navbar'
 import styles from '../styles/Home.module.scss'
+import type { NextPage } from 'next'
+import WordsPanel from '../components/WordsPanel'
 
 
 const Home: NextPage = () => {
@@ -39,6 +38,7 @@ const Home: NextPage = () => {
         <WordsPanel className={styles.panel} />
         <Keyboard className={styles.keyboard} />
       </div>
+      <ErrorDisplay />
     </>
   )
 }
