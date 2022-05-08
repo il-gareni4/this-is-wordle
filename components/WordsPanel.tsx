@@ -1,7 +1,7 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 import { useAppSelector } from '../hooks'
 import styles from '../styles/components/WordsPanel.module.scss'
+import letterBlockStyles from '../styles/components/LetterBlock.module.scss'
 import LetterBlock from './words-panel/LetterBlock'
 
 export interface WordsPanelProps {
@@ -25,7 +25,21 @@ export default function WordsPanel({ className }: WordsPanelProps) {
 
           } else if (letter) blockState = "letter"
           else blockState = "empty"
-          return (<LetterBlock key={rowIndex * row.length + letterIndex} state={blockState}>{letter}</LetterBlock>)
+
+          let anim;
+          if (blockState === "correct") anim = `${letterBlockStyles.correctAnim} 0.6s ease-in-out forwards 1 ${0.2 * letterIndex}s`;
+          else if (blockState === "wrongPlacement") anim = `${letterBlockStyles.wrongPlacementAnim} 0.6s ease-in-out forwards 1 ${0.2 * letterIndex}s`;
+          else if (blockState === "incorrect") anim = `${letterBlockStyles.incorrectAnim} 0.6s ease-in-out forwards 1 ${0.2 * letterIndex}s`;
+          else if (blockState === "letter") anim = `${letterBlockStyles.letterAnim} 0.1s ease-in-out forwards 1`;
+          else anim = "";
+
+          return (<LetterBlock
+            key={rowIndex * row.length + letterIndex}
+            state={blockState}
+            style={{animation: anim}}
+          >
+            {letter}
+          </LetterBlock>)
         })
       })}
     </main>

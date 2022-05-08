@@ -10,28 +10,73 @@
     border-color: var(--main-300);
 }
 
-.letter {
-    border-color: var(--main-400);
+@keyframes letterAnim {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+        border-color: var(--main-400);
+    }
+
+    100% {
+        transform: scale(1);
+        border-color: var(--main-400);
+    }
 }
 
-.correct, .wrongPlacement, .incorrect {
-    color: var(--text-900);
-    font-weight: 500;
-} 
 
-.incorrect {
-    border-color: var(--dark-500);
-    background-color: var(--dark-500);
+@keyframes correctAnim {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.15);
+        box-shadow: 0 0 12px rgba(54, 174, 124, 0.80);
+        border-color: var(--green-500);
+        background-color: var(--green-500);
+        color: var(--text-900);
+    }
+
+    100% {
+        transform: scale(1);
+        color: var(--text-900);
+        box-shadow: 0 0 6px rgba(54, 174, 124, 0.33);
+        border-color: var(--green-500);
+        background-color: var(--green-500);
+        font-weight: 500;
+    }
 }
 
-.wrongPlacement {
-    border-color: var(--yellow-500);
-    background-color: var(--yellow-500);
-    box-shadow: 0 0 6px rgba(226, 193, 7, 0.33);
+@keyframes wrongPlacementAnim {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+        box-shadow: 0 0 6px rgba(226, 193, 7, 0.33);
+        border-color: var(--yellow-500);
+        background-color: var(--yellow-500);
+    }
+
+    100% {
+        transform: scale(1);
+        border-color: var(--yellow-500);
+        background-color: var(--yellow-500);
+        box-shadow: 0 0 6px rgba(226, 193, 7, 0.33);
+        font-weight: 500;
+        color: var(--text-900);
+    }
 }
 
-.correct {
-    border-color: var(--green-500);
-    background-color: var(--green-500);
-    box-shadow: 0 0 6px rgba(54, 174, 124, 0.33);
+@keyframes incorrectAnim {
+    100% {
+        border-color: var(--dark-500);
+        background-color: var(--dark-500);
+        font-weight: 500;
+        color: var(--text-900);
+    }
 }
