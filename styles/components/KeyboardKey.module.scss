@@ -123,4 +123,24 @@
             box-shadow: inset 0px 4px 0px var(--dark-700);
         }
     }
+
+    @media screen and (max-width: 768px) {
+        font-size: 1.625rem;
+        height: 55px;
+
+        svg {
+            width: 1.625rem;
+            height: 1.625rem;
+        }
+    }
+
+    @media screen and (max-width: 425px) {
+        font-size: 1.4rem;
+        height: 47px;
+
+        svg {
+            width:1.4rem;
+            height: 1.4rem;
+        }
+    }
 }

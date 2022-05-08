@@ -19,6 +19,10 @@
 
     &>button:not(:first-child) {
         margin-left: 9px;
+
+        @media screen and (max-width: 425px) {
+            margin-left: 5px;
+        }
     }
 }
 
