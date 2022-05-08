@@ -6,6 +6,14 @@
     grid-template-columns: repeat(3, 1fr);
     align-items: center;
 
+    @media screen and (max-width: 768px) {
+        padding: 8px 18px;
+    }
+
+    @media screen and (max-width: 425px) {
+        padding: 6px 12px;
+    }
+
     & > *:first-child {
         justify-self: left;
     }
@@ -21,4 +29,8 @@
 
 .rightButtons > button:last-child {
     margin-left: 15px;
+
+    @media screen and (max-width: 425px) {
+        margin-left: 8px;
+    }
 }
