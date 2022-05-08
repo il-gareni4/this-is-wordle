@@ -4,6 +4,21 @@
     place-items: center;
     font-size: 2.25rem;
     border: 2px solid transparent;
+    aspect-ratio: 1;
+
+    @media screen and (max-height: 750px) {
+        font-size: 2rem
+    }
+
+    @media screen and (max-height: 680px) {
+        font-size: 1.8rem;
+        border-radius: 8px;
+    }
+
+    @media screen and (max-height: 600px) {
+        font-size: 1.6rem;
+        border-radius: 6px;
+    }
 }
 
 .empty {

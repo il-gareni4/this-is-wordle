@@ -4,6 +4,20 @@
     justify-self: center;
     display: grid;
     grid-template-columns: repeat(5, minmax(35px, 60px));
-    grid-auto-rows: minmax(35px, 60px);
     gap: 10px;
+
+    @media screen and (max-height: 750px) {
+        grid-template-columns: repeat(5, minmax(35px, 50px));
+        gap: 8px
+    }
+
+    @media screen and (max-height: 680px) {
+        grid-template-columns: repeat(5, minmax(35px, 40px));
+        gap: 6px
+    }
+
+    @media screen and (max-height: 600px) {
+        grid-template-columns: repeat(5, 35px);
+        gap: 6px
+    }
 }

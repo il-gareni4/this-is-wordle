@@ -43,7 +43,7 @@ export default function Keyboard({ className }: KeyboardProps) {
                 </KeyboardKey>
             </div>
             <div className={styles.keyboardRow}>
-                <div className={styles.space} style={{marginRight: 5}} />
+                <div className={styles.space} style={{marginRight: 4}} />
                 <KeyboardKey onClick={() => dispatch(addLetter("Z"))} style={[lettersState['Z']]}>Z</KeyboardKey>
                 <KeyboardKey onClick={() => dispatch(addLetter("X"))} style={[lettersState['X']]}>X</KeyboardKey>
                 <KeyboardKey onClick={() => dispatch(addLetter("C"))} style={[lettersState['C']]}>C</KeyboardKey>
