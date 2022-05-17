@@ -4,6 +4,14 @@
   height: calc(100vh - 74px);
   align-items: center;
   justify-content: space-between;
+
+  @media screen and (max-width: 768px) {
+    height: calc(100vh - 70px);
+  }
+
+  @media screen and (max-width: 425px) {
+    height: calc(100vh - 65px);
+  }
 }
 
 .panel {
@@ -13,4 +21,48 @@
 
 .keyboard {
   margin-bottom: 30px;
+}
+
+.modalEnter {
+  &.modalBlackout {
+    background-color: rgba(0, 0, 0, 0);
+  }
+
+  .modalWindow {
+    transform: scale(0);
+  }
+}
+
+.modalEnterActive {
+  &.modalBlackout {
+    background-color: rgba(0, 0, 0, 0.25);
+    transition: background-color 0.25s;
+  }
+
+  .modalWindow {
+    transform: none;
+    transition: transform 0.25s;
+  }
+}
+
+.modalExit {
+  &.modalBlackout {
+    background-color: rgba(0, 0, 0, 0.25);
+  }
+
+  .modalWindow {
+    transform: none;
+  }
+}
+
+.modalExitActive {
+  &.modalBlackout {
+    background-color: rgba(0, 0, 0, 0);
+    transition: background-color 0.2s;
+  }
+
+  .modalWindow {
+    transform: scale(0);
+    transition: transform 0.2s;
+  }
 }

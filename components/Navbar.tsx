@@ -6,14 +6,18 @@ import InfoCircleIcon from './icons/InfoCircleIcon'
 import RankingIcon from './icons/RankingIcon'
 import SettingIcon from './icons/SettingIcon'
 
-export default function Navbar() {
+interface NavbarProps {
+    onStatsClick: (e: React.MouseEvent) => void
+}
+
+export default function Navbar({onStatsClick}: NavbarProps) {
     return (
         <nav className={styles.navbar}>
-            <NavbarButton><InfoCircleIcon /></NavbarButton>
+            <NavbarButton onClick={() => 0}><InfoCircleIcon /></NavbarButton>
             <Logo />
             <div className={styles.rightButtons}>
-                <NavbarButton><RankingIcon /></NavbarButton>
-                <NavbarButton><SettingIcon /></NavbarButton>
+                <NavbarButton onClick={onStatsClick}><RankingIcon /></NavbarButton>
+                <NavbarButton onClick={() => 0}><SettingIcon /></NavbarButton>
             </div>
         </nav>
     )

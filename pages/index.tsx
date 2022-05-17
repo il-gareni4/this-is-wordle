@@ -1,6 +1,6 @@
 import { addLetter, confirmWord, removeLetter } from '../store/gameSlice'
 import { useAppDispatch } from '../hooks'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import ErrorDisplay from '../components/ErrorDisplay'
 import Head from 'next/head'
 import Keyboard from '../components/Keyboard'
@@ -8,10 +8,14 @@ import Navbar from '../components/Navbar'
 import styles from '../styles/Home.module.scss'
 import type { NextPage } from 'next'
 import WordsPanel from '../components/WordsPanel'
+import Modal from '../components/Modal'
+import { CSSTransition } from 'react-transition-group'
 
 
 const Home: NextPage = () => {
   const dispatch = useAppDispatch();
+  const [gameModal, setGameModal] = useState(false)
+  const [statsModal, setStatsModal] = useState(false)
 
   useEffect(() => {
     const keyAction = (ev: KeyboardEvent) => {
@@ -33,12 +37,50 @@ const Home: NextPage = () => {
       <Head>
         <title>This is Wordle</title>
       </Head>
-      <Navbar />
+      <Navbar onStatsClick={() => setStatsModal(true)} />
       <div className={styles.container}>
         <WordsPanel className={styles.panel} />
         <Keyboard className={styles.keyboard} />
       </div>
       <ErrorDisplay />
+      <CSSTransition
+        in={gameModal}
+        timeout={{enter: 250, exit: 200}}
+        unmountOnExit
+        classNames={{
+          enter: styles.modalEnter,
+          enterActive: styles.modalEnterActive,
+          exit: styles.modalExit,
+          exitActive: styles.modalExitActive
+        }}
+      >
+        <Modal
+          onClose={() => setGameModal(false)}
+          blackoutClass={styles.modalBlackout}
+          windowClass={styles.modalWindow}
+        >
+          <h2>Game</h2>
+        </Modal>
+      </CSSTransition>
+      <CSSTransition
+        in={statsModal}
+        timeout={{enter: 250, exit: 200}}
+        unmountOnExit
+        classNames={{
+          enter: styles.modalEnter,
+          enterActive: styles.modalEnterActive,
+          exit: styles.modalExit,
+          exitActive: styles.modalExitActive
+        }}
+      >
+        <Modal
+          onClose={() => setStatsModal(false)}
+          blackoutClass={styles.modalBlackout}
+          windowClass={styles.modalWindow}
+        >
+          <h2>Statistics</h2>
+        </Modal>
+      </CSSTransition>
     </>
   )
 }

@@ -20,6 +20,12 @@ a {
   font-family: 'Fira Sans', sans-serif;
 }
 
+h2 {
+  font-size: 2.25rem;
+  font-weight: 500;
+  margin: 0;
+}
+
 :root {
   --main-100: #FFFFFF;
   --main-200: #F2F4FC;
