@@ -26,6 +26,12 @@ h2 {
   margin: 0;
 }
 
+h3 {
+  font-size: 1.875rem;
+  font-weight: 500;
+  margin: 0;
+}
+
 :root {
   --main-100: #FFFFFF;
   --main-200: #F2F4FC;

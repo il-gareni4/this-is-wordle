@@ -45,7 +45,7 @@ const Home: NextPage = () => {
       <ErrorDisplay />
       <CSSTransition
         in={gameModal}
-        timeout={{enter: 250, exit: 200}}
+        timeout={{ enter: 250, exit: 200 }}
         unmountOnExit
         classNames={{
           enter: styles.modalEnter,
@@ -64,7 +64,7 @@ const Home: NextPage = () => {
       </CSSTransition>
       <CSSTransition
         in={statsModal}
-        timeout={{enter: 250, exit: 200}}
+        timeout={{ enter: 250, exit: 200 }}
         unmountOnExit
         classNames={{
           enter: styles.modalEnter,
@@ -78,7 +78,33 @@ const Home: NextPage = () => {
           blackoutClass={styles.modalBlackout}
           windowClass={styles.modalWindow}
         >
-          <h2>Statistics</h2>
+          <h2 className={styles.statsTitle}>Statistics</h2>
+          <div className={styles.statsList}>
+            <div className={styles.statsElement}>
+              <h3>8</h3>
+              <div>Games</div>
+            </div>
+            <div className={styles.statsSeparator} />
+            <div className={styles.statsElement}>
+              <h3>5</h3>
+              <div>Wins</div>
+            </div>
+            <div className={styles.statsSeparator} />
+            <div className={styles.statsElement}>
+              <h3>62.5%</h3>
+              <div>Win %</div>
+            </div>
+            <div className={styles.statsSeparator} />
+            <div className={styles.statsElement}>
+              <h3>1</h3>
+              <div>Current<br />streak</div>
+            </div>
+            <div className={styles.statsSeparator} />
+            <div className={styles.statsElement}>
+              <h3>3</h3>
+              <div>Max<br />streak</div>
+            </div>
+          </div>
         </Modal>
       </CSSTransition>
     </>
