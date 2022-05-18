@@ -1,6 +1,6 @@
 import { addLetter, confirmWord, removeLetter, startNewGame } from '../store/gameSlice'
 import { useAppDispatch, useAppSelector } from '../hooks'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import ErrorDisplay from '../components/ErrorDisplay'
 import Head from 'next/head'
 import Keyboard from '../components/Keyboard'
@@ -17,6 +17,9 @@ const Home: NextPage = () => {
   const gameEnded = useAppSelector((state) => state.game.gameEnded);
   const gameResult = useAppSelector((state) => state.game.gameResult);
   const intendedWord = useAppSelector((state) => state.game.intendedWord);
+
+  const stats = useAppSelector((state) => state.game.stats);
+
   const [gameModal, setGameModal] = useState(false)
   const [statsModal, setStatsModal] = useState(false)
 
@@ -49,12 +52,19 @@ const Home: NextPage = () => {
     setTimeout(() => setStatsModal(true), 200);
   }
 
+  const winPercent = useMemo(() => {
+    if (stats.totalGames == 0) return "0"
+    const percent = stats.gamesWon / stats.totalGames
+
+    return (percent * 100).toFixed(1).replace(/\.0+$/, "")
+  }, [stats])
+
   return (
     <>
       <Head>
         <title>This is Wordle</title>
       </Head>
-      <Navbar onStatsClick={() => setStatsModal(true)} onGameResultClick={() => setGameModal(true)}/>
+      <Navbar onStatsClick={() => setStatsModal(true)} onGameResultClick={() => setGameModal(true)} />
       <div className={styles.container}>
         <WordsPanel className={styles.panel} />
         <Keyboard className={styles.keyboard} />
@@ -103,27 +113,27 @@ const Home: NextPage = () => {
           <h2 className={styles.statsTitle}>Statistics</h2>
           <div className={styles.statsList}>
             <div className={styles.statsElement}>
-              <h3>8</h3>
+              <h3>{stats.totalGames}</h3>
               <div>Games</div>
             </div>
             <div className={styles.statsSeparator} />
             <div className={styles.statsElement}>
-              <h3>5</h3>
+              <h3>{stats.gamesWon}</h3>
               <div>Wins</div>
             </div>
             <div className={styles.statsSeparator} />
             <div className={styles.statsElement}>
-              <h3>62.5%</h3>
+              <h3>{winPercent}%</h3>
               <div>Win %</div>
             </div>
             <div className={styles.statsSeparator} />
             <div className={styles.statsElement}>
-              <h3>1</h3>
+              <h3>{stats.currentStreak}</h3>
               <div>Current<br />streak</div>
             </div>
             <div className={styles.statsSeparator} />
             <div className={styles.statsElement}>
-              <h3>3</h3>
+              <h3>{stats.maxStreak}</h3>
               <div>Max<br />streak</div>
             </div>
           </div>

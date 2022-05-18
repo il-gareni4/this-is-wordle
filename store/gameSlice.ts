@@ -11,7 +11,8 @@ interface GameState {
     wordsList: any,
     error?: { time: number, message: string },
     gameEnded: boolean,
-    gameResult: boolean
+    gameResult: boolean,
+    stats: { totalGames: number, gamesWon: number, currentStreak: number, maxStreak: number }
 }
 
 const words = Object.keys(words5);
@@ -29,7 +30,13 @@ const initialState: GameState = {
     },
     wordsList: words5,
     gameEnded: false,
-    gameResult: false
+    gameResult: false,
+    stats: {
+        totalGames: 0,
+        gamesWon: 0,
+        currentStreak: 0,
+        maxStreak: 0
+    }
 }
 
 for (let i = 0; i < initialState.maxTries; i++) {
@@ -76,6 +83,15 @@ export const gameSlice = createSlice({
             if (state.lastLetter[0] >= state.maxTries || wordFound) {
                 state.gameEnded = true;
                 state.gameResult = wordFound;
+                state.stats.totalGames++;
+                if (wordFound) {
+                    state.stats.gamesWon++;
+                    state.stats.currentStreak++;
+                    if (state.stats.currentStreak > state.stats.maxStreak)
+                        state.stats.maxStreak = state.stats.currentStreak
+                } else {
+                    state.stats.currentStreak = 0;
+                }
             }
         },
         startNewGame: (state) => {
