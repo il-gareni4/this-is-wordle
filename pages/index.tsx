@@ -1,5 +1,5 @@
-import { addLetter, confirmWord, removeLetter } from '../store/gameSlice'
-import { useAppDispatch } from '../hooks'
+import { addLetter, confirmWord, removeLetter, startNewGame } from '../store/gameSlice'
+import { useAppDispatch, useAppSelector } from '../hooks'
 import React, { useEffect, useState } from 'react'
 import ErrorDisplay from '../components/ErrorDisplay'
 import Head from 'next/head'
@@ -14,6 +14,9 @@ import { CSSTransition } from 'react-transition-group'
 
 const Home: NextPage = () => {
   const dispatch = useAppDispatch();
+  const gameEnded = useAppSelector((state) => state.game.gameEnded);
+  const gameResult = useAppSelector((state) => state.game.gameResult);
+  const intendedWord = useAppSelector((state) => state.game.intendedWord);
   const [gameModal, setGameModal] = useState(false)
   const [statsModal, setStatsModal] = useState(false)
 
@@ -32,12 +35,26 @@ const Home: NextPage = () => {
     };
   }, [dispatch]);
 
+  useEffect(() => {
+    if (gameEnded) setGameModal(true)
+  }, [gameEnded])
+
+  const _startNewGame = () => {
+    setGameModal(false);
+    setTimeout(() => dispatch(startNewGame()), 200);
+  }
+
+  const _showStats = () => {
+    setGameModal(false)
+    setTimeout(() => setStatsModal(true), 200);
+  }
+
   return (
     <>
       <Head>
         <title>This is Wordle</title>
       </Head>
-      <Navbar onStatsClick={() => setStatsModal(true)} />
+      <Navbar onStatsClick={() => setStatsModal(true)} onGameResultClick={() => setGameModal(true)}/>
       <div className={styles.container}>
         <WordsPanel className={styles.panel} />
         <Keyboard className={styles.keyboard} />
@@ -59,7 +76,12 @@ const Home: NextPage = () => {
           blackoutClass={styles.modalBlackout}
           windowClass={styles.modalWindow}
         >
-          <h2>Game</h2>
+          <h2 className={styles.gameModalTitle}>{gameResult ? "Correct!" : "Fail!"}</h2>
+          <div className={styles.gameModalIntendedWord}>Intended word was <h4>{intendedWord}</h4></div>
+          <div className={styles.gameModalActions}>
+            <button className='blue' onClick={_showStats}>Statistics</button>
+            <button className='green' onClick={_startNewGame}>Start new game</button>
+          </div>
         </Modal>
       </CSSTransition>
       <CSSTransition

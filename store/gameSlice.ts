@@ -9,7 +9,9 @@ interface GameState {
     lastLetter: number[],
     lettersState: any,
     wordsList: any,
-    error?: {time: number, message: string}
+    error?: { time: number, message: string },
+    gameEnded: boolean,
+    gameResult: boolean
 }
 
 const words = Object.keys(words5);
@@ -25,7 +27,9 @@ const initialState: GameState = {
         Q: '', R: '', S: '', T: '', U: '', V: '', W: '', X: '',
         Y: '', Z: ''
     },
-    wordsList: words5
+    wordsList: words5,
+    gameEnded: false,
+    gameResult: false
 }
 
 for (let i = 0; i < initialState.maxTries; i++) {
@@ -41,24 +45,23 @@ export const gameSlice = createSlice({
     initialState,
     reducers: {
         addLetter: (state, payload: PayloadAction<string>) => {
-            if (state.lastLetter[1] >= state.intendedWord.length || state.lastLetter[0] >= state.maxTries) return;
+            if (state.gameEnded || state.lastLetter[1] >= state.intendedWord.length) return;
             else {
                 state.attempts[state.lastLetter[0]][state.lastLetter[1]] = payload.payload;
                 state.lastLetter = [state.lastLetter[0], state.lastLetter[1] + 1];
             }
         },
         removeLetter: (state) => {
-            if (state.lastLetter[1] <= 0) return;
+            if (state.gameEnded || state.lastLetter[1] <= 0) return;
             else {
                 state.attempts[state.lastLetter[0]][state.lastLetter[1] - 1] = "";
                 state.lastLetter = [state.lastLetter[0], state.lastLetter[1] - 1];
             }
         },
         confirmWord: (state) => {
-            if (state.lastLetter[0] >= state.maxTries ||
-                state.lastLetter[1] < state.intendedWord.length) return;
+            if (state.gameEnded || state.lastLetter[1] < state.intendedWord.length) return;
             if (!state.wordsList.hasOwnProperty(state.attempts[state.lastLetter[0]].join("").toLocaleLowerCase())) {
-                state.error = {time: Date.now(), message: "Not in word list"}
+                state.error = { time: Date.now(), message: "Not in word list" }
                 return;
             }
             for (let i = 0; i < state.attempts[0].length; i++) {
@@ -68,10 +71,39 @@ export const gameSlice = createSlice({
                 else if (state.lettersState[letter] !== "green" && state.lettersState[letter] !== "yellow") state.lettersState[letter] = "black";
             }
             state.lastLetter = [state.lastLetter[0] + 1, 0];
+
+            const wordFound = state.attempts[state.lastLetter[0] - 1].join("") == state.intendedWord;
+            if (state.lastLetter[0] >= state.maxTries || wordFound) {
+                state.gameEnded = true;
+                state.gameResult = wordFound;
+            }
+        },
+        startNewGame: (state) => {
+            const words = Object.keys(state.wordsList);
+            state.intendedWord = words[Math.floor(Math.random() * words.length)].toUpperCase()
+            state.gameEnded = false;
+            state.gameResult = false;
+            state.lastLetter = [0, 0]
+
+            state.attempts = []
+            for (let i = 0; i < state.maxTries; i++) {
+                const wordPart = new Array(initialState.intendedWord.length);
+                for (let j = 0; j < initialState.intendedWord.length; j++) {
+                    wordPart[j] = ''
+                }
+                state.attempts.push(wordPart);
+            }
+
+            state.lettersState = {
+                A: '', B: '', C: '', D: '', E: '', F: '', G: '', H: '',
+                I: '', J: '', K: '', L: '', M: '', N: '', O: '', P: '',
+                Q: '', R: '', S: '', T: '', U: '', V: '', W: '', X: '',
+                Y: '', Z: ''
+            }
         }
     },
 })
 
-export const { addLetter, removeLetter, confirmWord } = gameSlice.actions
+export const { addLetter, removeLetter, confirmWord, startNewGame } = gameSlice.actions
 
 export default gameSlice.reducer

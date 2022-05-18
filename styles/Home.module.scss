@@ -23,9 +23,28 @@
   margin-bottom: 30px;
 }
 
-.statsTitle {
+.statsTitle, .gameModalTitle {
   text-align: center;
   margin-bottom: 15px;
+}
+
+.gameModalIntendedWord {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
+
+  h4 {
+    margin-left: 5px;
+  }
+}
+
+.gameModalActions {
+  display: flex;
+
+  & > button:not(:last-child) {
+    margin-right: 20px;
+  }
 }
 
 .statsList {
